@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{CA4D0E73-4424-F6C4-D6BF-52AF775C821E}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "RandomWeaponGame",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

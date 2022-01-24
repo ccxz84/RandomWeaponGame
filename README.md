@@ -16,7 +16,6 @@ https://git-scm.com/download/win
 
 Install & configure git
 ```
-$ apt-get install git
 $ git config -–global user.name “name”
 $ git config –-global user.email name@test.com
 $ git config –-global core.editor vim

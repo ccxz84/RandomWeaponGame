@@ -25,6 +25,16 @@ https://github.com/EpicGames/UnrealEngine
 git clone git@github.com:EpicGames/UnrealEngine.git --dept 1
 ```
 
+Install & configure git
+```
+$ apt-get install git
+$ git config -–global user.name “name”
+$ git config –-global user.email name@test.com
+$ git config –-global core.editor vim
+$ git config –-global merge.tool vimdiff
+$ git config –-global core.pager “less -r”
+```
+
 ### Visual Studio 2017 설치
 
 https://my.visualstudio.com/Downloads?q=visual%20studio%202017

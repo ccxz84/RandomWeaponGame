@@ -1,7 +1,7 @@
 # RandomWeaponGame
 ## 언리얼 엔진 빌드
 
-### EpicGames 계정 Githun 연동
+### EpicGames 계정 Github 연동
 
 https://www.unrealengine.com/ko/ue4-on-github?sessionInvalidated=true
 

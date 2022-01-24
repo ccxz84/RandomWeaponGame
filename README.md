@@ -5,7 +5,7 @@
 
 https://www.unrealengine.com/ko/ue4-on-github?sessionInvalidated=true
 
-에픽 게임즈 계정을 Github와 연동해야 함.
+EpicGames 계정을 Github와 연동해야 함.
 
 ---
 ### Install & configure git

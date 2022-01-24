@@ -1,5 +1,5 @@
 # RandomWeaponGame
-## 언리얼 엔진 빌드
+## Unreal Engine 빌드
 
 ### EpicGames 계정 Github 연동
 

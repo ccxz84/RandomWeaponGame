@@ -34,13 +34,19 @@ https://github.com/EpicGames/UnrealEngine
 git clone git@github.com:EpicGames/UnrealEngine.git --dept 1
 ```
 
-### Visual Studio 2017 설치
+### Visual Studio 2022 설치
 
-https://my.visualstudio.com/Downloads?q=visual%20studio%202017
+https://my.visualstudio.com/Downloads?q=visual%20studio%202022
 
 ![2](https://user-images.githubusercontent.com/22430531/150782723-cee9c5f0-c0a9-4bbd-9292-fc5d8f41d509.png)
 
-* 위의 옵션으로 Visual Studio 2017 설치
+* 위의 옵션으로 Visual Studio 2022 설치
+
+### .NET Framework 4.6.2
+
+https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net462-developer-pack-offline-installer
+
+설치를 진행한다.
 
 ### Unreal Engine Build
 

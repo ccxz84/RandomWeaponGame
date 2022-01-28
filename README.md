@@ -54,7 +54,7 @@ https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net462-de
 
 * GenerateProjectFiles.bat 실행
 
-* UE4.sln 더블 클릭하여 Visual Studio 2017 실행
+* UE4.sln 더블 클릭하여 Visual Studio 2022 실행
 
 ![3](https://user-images.githubusercontent.com/22430531/150782644-823aa036-f5a5-4aef-9421-6fd8cdec3fab.PNG)
 

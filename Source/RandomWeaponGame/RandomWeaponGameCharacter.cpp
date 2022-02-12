@@ -138,3 +138,10 @@ void ARandomWeaponGameCharacter::MoveRight(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
+// Called every frame
+void ARandomWeaponGameCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	SetCurrentHealth(GetCurrentHealth() - 0.1f);
+}

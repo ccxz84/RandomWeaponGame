@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "character/Entity.h"
 #include "RandomWeaponGameCharacter.generated.h"
 
 UCLASS(config=Game)
-class ARandomWeaponGameCharacter : public ACharacter
+class ARandomWeaponGameCharacter : public AEntity
 {
 	GENERATED_BODY()
 
@@ -68,5 +69,8 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 };
 

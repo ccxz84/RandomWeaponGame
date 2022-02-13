@@ -144,5 +144,4 @@ void ARandomWeaponGameCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	SetCurrentHealth(GetCurrentHealth() - 0.1f);
-	SetCurrentMana(GetCurrentMana() - 0.1f);
 }

@@ -73,9 +73,6 @@ DerivedDataCache/*
 # Package Files
 Packaged
 
-# Project File
-*.uproject
-
 # VSCODE file
 RandomWeaponGame.code-workspace
 .vscode

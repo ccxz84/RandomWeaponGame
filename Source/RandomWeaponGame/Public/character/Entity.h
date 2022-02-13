@@ -20,16 +20,30 @@ public:
 protected:
 
 	/** The player's maximum health. This is the highest that their health can be, and the value that their health starts at when spawned.*/
-	UPROPERTY(EditDefaultsOnly, Category = "Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
 	float MaxHealth;
-
-	/** The player's current health. When reduced to 0, they are considered dead.*/
-	UPROPERTY(ReplicatedUsing=OnRep_CurrentHealth)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
 	float CurrentHealth;
-
-	/** RepNotify for changes made to current health.*/
-	UFUNCTION()
-	void OnRep_CurrentHealth();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float MaxMana;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float CurrentMana;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float RegenHealth;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float RegenMana;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float Ad;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float Ap;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float AttackSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float Movement;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float Armor;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
+	float MagicResistance;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -39,13 +53,21 @@ public:
 	UFUNCTION(BlueprintPure, Category="Health")
 	FORCEINLINE float GetMaxHealth() const { return MaxHealth; } 
 
-	/** Getter for Current Health.*/
 	UFUNCTION(BlueprintPure, Category="Health")
 	FORCEINLINE float GetCurrentHealth() const { return CurrentHealth; }
+
+	UFUNCTION(BlueprintPure, Category="Mana")
+	FORCEINLINE float GetMaxMana() const { return MaxMana; } 
+
+	UFUNCTION(BlueprintPure, Category="Mana")
+	FORCEINLINE float GetCurrentMana() const { return CurrentMana; }
 
 	/** Setter for Current Health. Clamps the value between 0 and MaxHealth and calls OnHealthUpdate. Should only be called on the server.*/
 	UFUNCTION(BlueprintCallable, Category="Health")
 	void SetCurrentHealth(float healthValue);
+
+	UFUNCTION(BlueprintCallable, Category="Mana")
+	void SetCurrentMana(float healthValue);
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

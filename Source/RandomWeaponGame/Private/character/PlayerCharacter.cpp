@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "RandomWeaponGameCharacter.h"
+#include "Character/PlayerCharacter.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -10,9 +10,9 @@
 #include "GameFramework/SpringArmComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
-// ARandomWeaponGameCharacter
+// APlayerCharacter
 
-ARandomWeaponGameCharacter::ARandomWeaponGameCharacter()
+APlayerCharacter::APlayerCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -50,34 +50,34 @@ ARandomWeaponGameCharacter::ARandomWeaponGameCharacter()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void ARandomWeaponGameCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+void APlayerCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	PlayerInputComponent->BindAxis("MoveForward", this, &ARandomWeaponGameCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &ARandomWeaponGameCharacter::MoveRight);
+	PlayerInputComponent->BindAxis("MoveForward", this, &APlayerCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &APlayerCharacter::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("TurnRate", this, &ARandomWeaponGameCharacter::TurnAtRate);
+	PlayerInputComponent->BindAxis("TurnRate", this, &APlayerCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis("LookUpRate", this, &ARandomWeaponGameCharacter::LookUpAtRate);
+	PlayerInputComponent->BindAxis("LookUpRate", this, &APlayerCharacter::LookUpAtRate);
 
 	// handle touch devices
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &ARandomWeaponGameCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &ARandomWeaponGameCharacter::TouchStopped);
+	PlayerInputComponent->BindTouch(IE_Pressed, this, &APlayerCharacter::TouchStarted);
+	PlayerInputComponent->BindTouch(IE_Released, this, &APlayerCharacter::TouchStopped);
 
 	// VR headset functionality
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ARandomWeaponGameCharacter::OnResetVR);
+	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &APlayerCharacter::OnResetVR);
 }
 
 
-void ARandomWeaponGameCharacter::OnResetVR()
+void APlayerCharacter::OnResetVR()
 {
 	// If RandomWeaponGame is added to a project via 'Add Feature' in the Unreal Editor the dependency on HeadMountedDisplay in RandomWeaponGame.Build.cs is not automatically propagated
 	// and a linker error will result.
@@ -88,29 +88,29 @@ void ARandomWeaponGameCharacter::OnResetVR()
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
-void ARandomWeaponGameCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
+void APlayerCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {
 		Jump();
 }
 
-void ARandomWeaponGameCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
+void APlayerCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 {
 		StopJumping();
 }
 
-void ARandomWeaponGameCharacter::TurnAtRate(float Rate)
+void APlayerCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
-void ARandomWeaponGameCharacter::LookUpAtRate(float Rate)
+void APlayerCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
-void ARandomWeaponGameCharacter::MoveForward(float Value)
+void APlayerCharacter::MoveForward(float Value)
 {
 	if ((Controller != nullptr) && (Value != 0.0f))
 	{
@@ -124,7 +124,7 @@ void ARandomWeaponGameCharacter::MoveForward(float Value)
 	}
 }
 
-void ARandomWeaponGameCharacter::MoveRight(float Value)
+void APlayerCharacter::MoveRight(float Value)
 {
 	if ( (Controller != nullptr) && (Value != 0.0f) )
 	{
@@ -140,7 +140,7 @@ void ARandomWeaponGameCharacter::MoveRight(float Value)
 }
 
 // Called every frame
-void ARandomWeaponGameCharacter::Tick(float DeltaTime)
+void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	SetCurrentHealth(GetCurrentHealth() - 0.1f);

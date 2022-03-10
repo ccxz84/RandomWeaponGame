@@ -2,13 +2,13 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "Character/Entity.h"
 #include "GameFramework/Character.h"
-#include "character/Entity.h"
-#include "RandomWeaponGameCharacter.generated.h"
+#include "CoreMinimal.h"
+#include "PlayerCharacter.generated.h"
 
 UCLASS(config=Game)
-class ARandomWeaponGameCharacter : public AEntity
+class APlayerCharacter : public AEntity
 {
 	GENERATED_BODY()
 
@@ -20,7 +20,7 @@ class ARandomWeaponGameCharacter : public AEntity
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 public:
-	ARandomWeaponGameCharacter();
+	APlayerCharacter();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)

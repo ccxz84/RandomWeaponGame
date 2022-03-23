@@ -9,6 +9,22 @@
 #include "Engine/AssetManager.h"
 #include "Engine/ObjectLibrary.h"
 
+AMainGameMode::AMainGameMode(){
+    GameStateClass = AMainGameState::StaticClass();
+}
+
+void AMainGameMode::InitGameState(){
+    this->GetGameState<AMainGameState>()->MainGameState = EGameState::State_Ready;
+    CountdownTime = 60;
+    GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AMainGameMode::AdvanceTimer, 1.0f, true);
+}
+
+void AMainGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage){
+    Super::InitGame(MapName, Options, ErrorMessage);
+    UE_LOG(LogTemp, Log, TEXT("init game"));
+    
+}
+
 void AMainGameMode::SelectCharacter(APlayerController* NewPlayer) {
     int32 idx = FMath::RandRange(0, this->CharacterList.Num()-1);
 
@@ -40,4 +56,18 @@ void AMainGameMode::SetCharacter(TSoftClassPtr<UObject> CharacterPtr, APlayerCon
 void AMainGameMode::PostLogin(APlayerController* NewPlayer){
     Super::PostLogin(NewPlayer);
     this->SelectCharacter(NewPlayer);
+}
+
+void AMainGameMode::AdvanceTimer() {
+    --CountdownTime; 
+    if (CountdownTime < 1) {
+          // 카운트다운이 완료되면 타이머를 중지 
+        GetWorldTimerManager().ClearTimer(CountdownTimerHandle); 
+        GameStart();
+    }
+}
+
+void AMainGameMode::GameStart(){
+    UE_LOG(LogTemp, Log, TEXT("%s"), *(UGameplayStatics::GetGameState(this)->GetName()));
+    UE_LOG(LogTemp, Log, TEXT("GameStart"));
 }

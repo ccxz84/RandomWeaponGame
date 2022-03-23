@@ -54,8 +54,8 @@ void APlayerCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 {
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	// PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	// PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &APlayerCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &APlayerCharacter::MoveRight);
@@ -68,9 +68,9 @@ void APlayerCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &APlayerCharacter::LookUpAtRate);
 
-	// handle touch devices
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &APlayerCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &APlayerCharacter::TouchStopped);
+	// // handle touch devices
+	// PlayerInputComponent->BindTouch(IE_Pressed, this, &APlayerCharacter::TouchStarted);
+	// PlayerInputComponent->BindTouch(IE_Released, this, &APlayerCharacter::TouchStopped);
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &APlayerCharacter::OnResetVR);
@@ -88,15 +88,16 @@ void APlayerCharacter::OnResetVR()
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
-void APlayerCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		Jump();
-}
+// void APlayerCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
+// {
+// 	// if(!this->bIsAttack)
+// 	// 	Jump();
+// }
 
-void APlayerCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		StopJumping();
-}
+// void APlayerCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
+// {
+// 		StopJumping();
+// }
 
 void APlayerCharacter::TurnAtRate(float Rate)
 {
@@ -112,7 +113,7 @@ void APlayerCharacter::LookUpAtRate(float Rate)
 
 void APlayerCharacter::MoveForward(float Value)
 {
-	if ((Controller != nullptr) && (Value != 0.0f))
+	if ((Controller != nullptr) && (Value != 0.0f) && !this->bIsAttack)
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -126,7 +127,7 @@ void APlayerCharacter::MoveForward(float Value)
 
 void APlayerCharacter::MoveRight(float Value)
 {
-	if ( (Controller != nullptr) && (Value != 0.0f) )
+	if ( (Controller != nullptr) && (Value != 0.0f) && !this->bIsAttack)
 	{
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -143,6 +144,6 @@ void APlayerCharacter::MoveRight(float Value)
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	SetCurrentHealth(GetCurrentHealth() - 0.1f);
-	SetCurrentMana(GetCurrentMana() - 0.1f);
+	// SetCurrentHealth(GetCurrentHealth() - 0.1f);
+	// SetCurrentMana(GetCurrentMana() - 0.1f);
 }

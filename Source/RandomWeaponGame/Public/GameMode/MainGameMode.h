@@ -27,6 +27,7 @@ public:
 	void SelectCharacter(APlayerController* NewPlayer);
 	UFUNCTION(BlueprintCallable, Category = "Test")
 	void SetCharacter(TSoftClassPtr<UObject> Character, APlayerController* NewPlayer);
+	virtual void InitGameState();
 	
 private:
 

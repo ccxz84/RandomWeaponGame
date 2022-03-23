@@ -13,13 +13,16 @@ AMainGameMode::AMainGameMode(){
     GameStateClass = AMainGameState::StaticClass();
 }
 
+void AMainGameMode::InitGameState(){
+    this->GetGameState<AMainGameState>()->MainGameState = EGameState::State_Ready;
+    CountdownTime = 60;
+    GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AMainGameMode::AdvanceTimer, 1.0f, true);
+}
+
 void AMainGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage){
     Super::InitGame(MapName, Options, ErrorMessage);
     UE_LOG(LogTemp, Log, TEXT("init game"));
-    UE_LOG(LogTemp, Log, TEXT("%d"), (this->GetGameState<AMainGameState>() == NULL));
-    // this->GetGameState<AMainGameState>()->MainGameState = EGameState::State_Ready;
-    CountdownTime = 60;
-    GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &AMainGameMode::AdvanceTimer, 1.0f, true);
+    
 }
 
 void AMainGameMode::SelectCharacter(APlayerController* NewPlayer) {
@@ -57,7 +60,6 @@ void AMainGameMode::PostLogin(APlayerController* NewPlayer){
 
 void AMainGameMode::AdvanceTimer() {
     --CountdownTime; 
-    UE_LOG(LogTemp, Log, TEXT("timer %d"), this->CountdownTime);
     if (CountdownTime < 1) {
           // 카운트다운이 완료되면 타이머를 중지 
         GetWorldTimerManager().ClearTimer(CountdownTimerHandle); 
@@ -66,6 +68,6 @@ void AMainGameMode::AdvanceTimer() {
 }
 
 void AMainGameMode::GameStart(){
-    // this->GetGameState<AMainGameState>()->MainGameState = EGameState::State_Start;
+    UE_LOG(LogTemp, Log, TEXT("%s"), *(UGameplayStatics::GetGameState(this)->GetName()));
     UE_LOG(LogTemp, Log, TEXT("GameStart"));
 }

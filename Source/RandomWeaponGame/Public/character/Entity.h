@@ -44,6 +44,8 @@ protected:
 	float Armor;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "EntityStats", Replicated)
 	float MagicResistance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack", Replicated)
+	bool bIsAttack;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -62,12 +64,29 @@ public:
 	UFUNCTION(BlueprintPure, Category="Mana")
 	FORCEINLINE float GetCurrentMana() const { return CurrentMana; }
 
+	UFUNCTION(BlueprintPure, Category="Attack")
+	FORCEINLINE bool GetIsAttack() const { return bIsAttack; }
+
 	/** Setter for Current Health. Clamps the value between 0 and MaxHealth and calls OnHealthUpdate. Should only be called on the server.*/
 	UFUNCTION(BlueprintCallable, Category="Health")
 	void SetCurrentHealth(float healthValue);
 
 	UFUNCTION(BlueprintCallable, Category="Mana")
 	void SetCurrentMana(float healthValue);
+
+	UFUNCTION(BlueprintCallable, Category="Attack")
+	void SetIsAttack(bool IsAttackValue);
+
+	UFUNCTION(BlueprintCallable, Server, reliable, Category="Attack")
+	void Attack();
+	
+	UFUNCTION(BlueprintCallable, Server, reliable,  Category="Attack")
+	void AttackEnd();
+
+	// void AttackDamage();
+
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	float TakeDamage( float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser ) override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

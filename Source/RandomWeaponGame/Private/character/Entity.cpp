@@ -10,10 +10,12 @@ AEntity::AEntity()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+    this->bReplicates = true;
 	MaxHealth = 2100.0f;
 	CurrentHealth = MaxHealth;
-    MaxMana = 2100.0f;
+    MaxMana = 200.0f;
 	CurrentMana = MaxMana;
+    bIsAttack = false;
 }
 
 // Called when the game starts or when spawned
@@ -46,6 +48,22 @@ void AEntity::GetLifetimeReplicatedProps(TArray <FLifetimeProperty> & OutLifetim
     DOREPLIFETIME(AEntity, CurrentHealth);
     DOREPLIFETIME(AEntity, MaxMana);
     DOREPLIFETIME(AEntity, CurrentMana);
+    DOREPLIFETIME(AEntity, RegenHealth);
+    DOREPLIFETIME(AEntity, RegenMana);
+    DOREPLIFETIME(AEntity, Ad);
+    DOREPLIFETIME(AEntity, Ap);
+    DOREPLIFETIME(AEntity, AttackSpeed);
+    DOREPLIFETIME(AEntity, Movement);
+    DOREPLIFETIME(AEntity, Armor);
+    DOREPLIFETIME(AEntity, MagicResistance);
+    DOREPLIFETIME(AEntity, bIsAttack);
+}
+
+float AEntity::TakeDamage(float DamageTaken, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+    float damageApplied = CurrentHealth - DamageTaken;
+    SetCurrentHealth(damageApplied);
+    return damageApplied;
 }
 
 void AEntity::SetCurrentHealth(float healthValue)
@@ -64,3 +82,22 @@ void AEntity::SetCurrentMana(float manaValue)
     }
 }
 
+void AEntity::SetIsAttack(bool IsAttackValue)
+{
+    if (GetLocalRole() == ROLE_Authority)
+    {
+        this->bIsAttack = IsAttackValue;
+    }
+}
+
+void AEntity::Attack_Implementation()
+{
+    if(!this->bIsAttack)
+        this->bIsAttack = true;
+}
+
+void AEntity::AttackEnd_Implementation()
+{
+    if(this->bIsAttack)
+        this->bIsAttack = false;
+}

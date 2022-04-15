@@ -8,6 +8,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/AssetManager.h"
 #include "Engine/ObjectLibrary.h"
+#include "Containers/Map.h"
+#include "Containers/List.h"
 
 AMainGameMode::AMainGameMode(){
     GameStateClass = AMainGameState::StaticClass();

@@ -9,6 +9,9 @@
 #include "GameFramework/GameModeBase.h"
 #include "GameFramework/PlayerController.h"
 #include "TimerManager.h"
+#include "Event/EventComponent.h"
+#include "Containers/Map.h"
+#include "Containers/List.h"
 #include "MainGameMode.generated.h"
 
 /**
@@ -23,10 +26,13 @@ public:
 	AMainGameMode();
 	void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage);
 	void PostLogin(APlayerController* NewPlayer);
+
 	UFUNCTION(BlueprintCallable)
 	void SelectCharacter(APlayerController* NewPlayer);
 	UFUNCTION(BlueprintCallable, Category = "Test")
 	void SetCharacter(TSoftClassPtr<UObject> Character, APlayerController* NewPlayer);
+
+
 	virtual void InitGameState();
 	
 private:

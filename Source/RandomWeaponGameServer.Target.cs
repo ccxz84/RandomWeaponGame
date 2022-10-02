@@ -9,6 +9,9 @@ public class RandomWeaponGameServerTarget : TargetRules
 	{
 		Type = TargetType.Server;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.Add("RandomWeaponGame");
+		ExtraModuleNames.Add("RWMain");
+		ExtraModuleNames.Add("RWBase");
+		ExtraModuleNames.Add("RWFrameWork");
+		ExtraModuleNames.Add("RWUI");
 	}
 }

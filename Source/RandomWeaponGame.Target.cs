@@ -9,6 +9,9 @@ public class RandomWeaponGameTarget : TargetRules
 	{
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.Add("RandomWeaponGame");
+		ExtraModuleNames.Add("RWMain");
+		ExtraModuleNames.Add("RWBase");
+		ExtraModuleNames.Add("RWFrameWork");
+		ExtraModuleNames.Add("RWUI");
 	}
 }

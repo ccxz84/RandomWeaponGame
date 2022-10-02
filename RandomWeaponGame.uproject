@@ -5,7 +5,37 @@
 	"Description": "",
 	"Modules": [
 		{
-			"Name": "RandomWeaponGame",
+			"Name": "RWMain",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"CoreUObject",
+				"RWBase",
+				"RWFramework"
+			]
+		},
+		{
+			"Name": "RWUI",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"CoreUObject"
+			]
+		},
+		{
+			"Name": "RWFramework",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"CoreUObject",
+				"RWBase"
+			]
+		},
+		{
+			"Name": "RWBase",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [

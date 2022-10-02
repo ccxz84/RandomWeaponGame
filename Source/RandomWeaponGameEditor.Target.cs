@@ -9,6 +9,9 @@ public class RandomWeaponGameEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
-		ExtraModuleNames.Add("RandomWeaponGame");
+		ExtraModuleNames.Add("RWMain");
+		ExtraModuleNames.Add("RWBase");
+		ExtraModuleNames.Add("RWFramework");
+		ExtraModuleNames.Add("RWUI");
 	}
 }
